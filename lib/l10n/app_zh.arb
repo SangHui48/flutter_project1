@@ -1,0 +1,12 @@
+{
+  "appTitle": "Linklab",
+  "jobListTitle": "职位列表",
+  "applyButton": "申请",
+  "loadingJobs": "正在加载职位...",
+  "failedToLoadJobs": "加载职位失败",
+  "noJobsAvailable": "暂无职位",
+  "idLabel": "账号",
+  "passwordLabel": "密码",
+  "signUpButton": "注册",
+  "loginButton": "登录"
+}

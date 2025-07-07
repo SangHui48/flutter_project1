@@ -1,0 +1,12 @@
+{
+  "appTitle": "Linklab",
+  "jobListTitle": "Job List",
+  "applyButton": "Apply",
+  "loadingJobs": "Loading jobs...",
+  "failedToLoadJobs": "Failed to load jobs",
+  "noJobsAvailable": "No jobs available",
+  "idLabel": "ID",
+  "passwordLabel": "Password",
+  "signUpButton": "Sign Up",
+  "loginButton": "Login"
+}

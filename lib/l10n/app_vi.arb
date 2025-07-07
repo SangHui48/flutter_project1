@@ -1,0 +1,12 @@
+{
+  "appTitle": "Linklab",
+  "jobListTitle": "Danh Sách Việc Làm",
+  "applyButton": "Ứng tuyển",
+  "loadingJobs": "Đang tải công việc...",
+  "failedToLoadJobs": "Không tải được công việc",
+  "noJobsAvailable": "Không có công việc nào",
+  "idLabel": "ID",
+  "passwordLabel": "Mật khẩu",
+  "signUpButton": "Đăng ký",
+  "loginButton": "Đăng nhập"
+}
