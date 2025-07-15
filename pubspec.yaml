@@ -38,6 +38,7 @@ dependencies:
   intl: ^0.20.2
   flutter_localizations:
     sdk: flutter
+  intl_utils: ^2.8.11
 
 dev_dependencies:
   flutter_test:
@@ -98,3 +99,8 @@ flutter:
         - asset: assets/fonts/Roboto-Regular.ttf
         - asset: assets/fonts/Roboto-Bold.ttf
   generate: true
+
+flutter_intl:
+  enabled: true
+  class_name: AppLocalizations
+  main_locale: ko

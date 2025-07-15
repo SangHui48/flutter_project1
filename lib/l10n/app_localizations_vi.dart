@@ -9,7 +9,7 @@ class AppLocalizationsVi extends AppLocalizations {
   AppLocalizationsVi([String locale = 'vi']) : super(locale);
 
   @override
-  String get appTitle => 'Linklab';
+  String get appTitle => 'ODDO';
 
   @override
   String get jobListTitle => 'Danh Sách Việc Làm';
@@ -37,4 +37,17 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get loginButton => 'Đăng nhập';
+
+  @override
+  String get nameLabel => 'Tên';
+  @override
+  String get phoneOrEmailLabel => 'Số điện thoại hoặc Email';
+  @override
+  String get isForeignerLabel => 'Tôi là người nước ngoài';
+  @override
+  String get visaExpirationDateLabel => 'Ngày hết hạn visa';
+  @override
+  String get selectDateLabel => 'Chọn ngày';
+  @override
+  String get nextButton => 'Tiếp theo';
 }

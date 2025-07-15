@@ -9,7 +9,7 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get appTitle => 'Linklab';
+  String get appTitle => 'ODDO';
 
   @override
   String get jobListTitle => '职位列表';
@@ -37,4 +37,17 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get loginButton => '登录';
+
+  @override
+  String get nameLabel => '姓名';
+  @override
+  String get phoneOrEmailLabel => '手机号或邮箱';
+  @override
+  String get isForeignerLabel => '我是外国人';
+  @override
+  String get visaExpirationDateLabel => '签证到期日';
+  @override
+  String get selectDateLabel => '选择日期';
+  @override
+  String get nextButton => '下一步';
 }

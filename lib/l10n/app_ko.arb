@@ -1,5 +1,5 @@
 {
-  "appTitle": "Linklab",
+  "appTitle": "ODDO",
   "jobListTitle": "일자리 목록",
   "applyButton": "지원하기",
   "loadingJobs": "일자리를 불러오는 중...",
@@ -8,5 +8,11 @@
   "idLabel": "아이디",
   "passwordLabel": "비밀번호",
   "signUpButton": "회원가입",
-  "loginButton": "로그인"
+  "loginButton": "로그인",
+  "nameLabel": "이름",
+  "phoneOrEmailLabel": "휴대폰 번호 또는 이메일",
+  "isForeignerLabel": "외국인입니다",
+  "visaExpirationDateLabel": "비자 만료일",
+  "selectDateLabel": "날짜 선택",
+  "nextButton": "다음"
 }

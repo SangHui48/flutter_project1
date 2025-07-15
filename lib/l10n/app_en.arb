@@ -1,5 +1,5 @@
 {
-  "appTitle": "Linklab",
+  "appTitle": "ODDO",
   "jobListTitle": "Job List",
   "applyButton": "Apply",
   "loadingJobs": "Loading jobs...",
@@ -8,5 +8,11 @@
   "idLabel": "ID",
   "passwordLabel": "Password",
   "signUpButton": "Sign Up",
-  "loginButton": "Login"
+  "loginButton": "Login",
+  "nameLabel": "Name",
+  "phoneOrEmailLabel": "Phone or Email",
+  "isForeignerLabel": "I am a foreigner",
+  "visaExpirationDateLabel": "Visa Expiration Date",
+  "selectDateLabel": "Select date",
+  "nextButton": "Next"
 }

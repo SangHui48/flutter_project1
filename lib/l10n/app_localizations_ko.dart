@@ -9,7 +9,7 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
-  String get appTitle => 'Linklab';
+  String get appTitle => 'ODDO';
 
   @override
   String get jobListTitle => '일자리 목록';
@@ -37,4 +37,17 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get loginButton => '로그인';
+
+  @override
+  String get nameLabel => '이름';
+  @override
+  String get phoneOrEmailLabel => '휴대폰 번호 또는 이메일';
+  @override
+  String get isForeignerLabel => '외국인입니다';
+  @override
+  String get visaExpirationDateLabel => '비자 만료일';
+  @override
+  String get selectDateLabel => '날짜 선택';
+  @override
+  String get nextButton => '다음';
 }

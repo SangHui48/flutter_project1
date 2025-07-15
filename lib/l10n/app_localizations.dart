@@ -102,7 +102,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-  /// **'Linklab'**
+  /// **'ODDO'**
   String get appTitle;
 
   /// No description provided for @jobListTitle.
@@ -158,6 +158,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Login'**
   String get loginButton;
+
+  /// No description provided for @nameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get nameLabel;
+
+  /// No description provided for @phoneOrEmailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone or Email'**
+  String get phoneOrEmailLabel;
+
+  /// No description provided for @isForeignerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a foreigner'**
+  String get isForeignerLabel;
+
+  /// No description provided for @visaExpirationDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Visa Expiration Date'**
+  String get visaExpirationDateLabel;
+
+  /// No description provided for @selectDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Select date'**
+  String get selectDateLabel;
+
+  /// No description provided for @nextButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get nextButton;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

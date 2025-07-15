@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: const Color(0xFF002B5B),
       body: Center(
         child: Text(
-          'Linklab',
+          'ODDO',
           style: const TextStyle(
             color: Colors.white,
             fontSize: 36,

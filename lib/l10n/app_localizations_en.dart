@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Linklab';
+  String get appTitle => 'ODDO';
 
   @override
   String get jobListTitle => 'Job List';
@@ -37,4 +37,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loginButton => 'Login';
+
+  @override
+  String get nameLabel => 'Name';
+  @override
+  String get phoneOrEmailLabel => 'Phone or Email';
+  @override
+  String get isForeignerLabel => 'I am a foreigner';
+  @override
+  String get visaExpirationDateLabel => 'Visa Expiration Date';
+  @override
+  String get selectDateLabel => 'Select date';
+  @override
+  String get nextButton => 'Next';
 }

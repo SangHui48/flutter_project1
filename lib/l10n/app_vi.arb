@@ -1,5 +1,5 @@
 {
-  "appTitle": "Linklab",
+  "appTitle": "ODDO",
   "jobListTitle": "Danh Sách Việc Làm",
   "applyButton": "Ứng tuyển",
   "loadingJobs": "Đang tải công việc...",
@@ -8,5 +8,11 @@
   "idLabel": "ID",
   "passwordLabel": "Mật khẩu",
   "signUpButton": "Đăng ký",
-  "loginButton": "Đăng nhập"
+  "loginButton": "Đăng nhập",
+  "nameLabel": "Tên",
+  "phoneOrEmailLabel": "Số điện thoại hoặc Email",
+  "isForeignerLabel": "Tôi là người nước ngoài",
+  "visaExpirationDateLabel": "Ngày hết hạn visa",
+  "selectDateLabel": "Chọn ngày",
+  "nextButton": "Tiếp theo"
 }

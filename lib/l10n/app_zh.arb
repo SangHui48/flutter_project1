@@ -1,5 +1,5 @@
 {
-  "appTitle": "Linklab",
+  "appTitle": "ODDO",
   "jobListTitle": "职位列表",
   "applyButton": "申请",
   "loadingJobs": "正在加载职位...",
@@ -8,5 +8,11 @@
   "idLabel": "账号",
   "passwordLabel": "密码",
   "signUpButton": "注册",
-  "loginButton": "登录"
+  "loginButton": "登录",
+  "nameLabel": "姓名",
+  "phoneOrEmailLabel": "手机号或邮箱",
+  "isForeignerLabel": "我是外国人",
+  "visaExpirationDateLabel": "签证到期日",
+  "selectDateLabel": "选择日期",
+  "nextButton": "下一步"
 }

@@ -22,7 +22,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : null,
       title: Text(
-        title ?? AppLocalizations.of(context)?.appTitle ?? 'Linklab',
+        title ?? AppLocalizations.of(context)?.appTitle ?? 'ODDO',
         style: const TextStyle(
           color: Colors.white,
           fontSize: 26,
