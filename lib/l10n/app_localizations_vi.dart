@@ -50,4 +50,32 @@ class AppLocalizationsVi extends AppLocalizations {
   String get selectDateLabel => 'Chọn ngày';
   @override
   String get nextButton => 'Tiếp theo';
+  @override
+  String get rrnLabel => 'Số đăng ký người nước ngoài';
+  @override
+  String get phoneLabel => 'Số điện thoại';
+  @override
+  String get emailLabel => 'Email';
+  @override
+  String get visaTypeLabel => 'Loại thị thực';
+  @override
+  String get attachmentTitle => 'Tài liệu đính kèm';
+  @override
+  String get uploadLabel => 'Tải lên';
+  @override
+  String get uploadedLabel => 'Đã tải lên';
+  @override
+  String get idCardLabel => 'Thẻ căn cước';
+  @override
+  String get constructionCertLabel => 'Chứng chỉ đào tạo xây dựng';
+  @override
+  String get qualificationCertLabel => 'Chứng chỉ liên quan';
+  @override
+  String get prePlacementTestLabel => 'Đã kiểm tra trước khi bố trí';
+  @override
+  String get alienCardFrontLabel => 'Thẻ đăng ký người nước ngoài (Mặt trước)';
+  @override
+  String get alienCardBackLabel => 'Thẻ đăng ký người nước ngoài (Mặt sau)';
+  @override
+  String get unsupportedCountryLabel => 'Quốc gia không được hỗ trợ.';
 }

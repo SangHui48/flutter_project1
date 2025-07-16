@@ -194,6 +194,80 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Next'**
   String get nextButton;
+
+  /// No description provided for @rrnLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Alien Registration Number'**
+  String get rrnLabel;
+
+  /// No description provided for @phoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phoneLabel;
+
+  /// No description provided for @emailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get emailLabel;
+
+  /// No description provided for @visaTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Visa Type'**
+  String get visaTypeLabel;
+
+  /// No description provided for @attachmentTitle.
+  /// In en, this message translates to:
+  /// **'Attachment Documents'**
+  String get attachmentTitle;
+
+  /// No description provided for @uploadLabel.
+  /// In en, this message translates to:
+  /// **'Upload'**
+  String get uploadLabel;
+
+  /// No description provided for @uploadedLabel.
+  /// In en, this message translates to:
+  /// **'Uploaded'**
+  String get uploadedLabel;
+
+  /// No description provided for @idCardLabel.
+  /// In en, this message translates to:
+  /// **'ID Card'**
+  String get idCardLabel;
+
+  /// No description provided for @constructionCertLabel.
+  /// In en, this message translates to:
+  /// **'Construction Training Certificate'**
+  String get constructionCertLabel;
+
+  /// No description provided for @qualificationCertLabel.
+  /// In en, this message translates to:
+  /// **'Related Qualification Certificate'**
+  String get qualificationCertLabel;
+
+  /// No description provided for @prePlacementTestLabel.
+  /// In en, this message translates to:
+  /// **'Pre-placement test completed'**
+  String get prePlacementTestLabel;
+
+  /// No description provided for @alienCardFrontLabel.
+  /// In en, this message translates to:
+  /// **'Alien Registration Card (Front)'**
+  String get alienCardFrontLabel;
+
+  /// No description provided for @alienCardBackLabel.
+  /// In en, this message translates to:
+  /// **'Alien Registration Card (Back)'**
+  String get alienCardBackLabel;
+
+  /// No description provided for @unsupportedCountryLabel.
+  /// In en, this message translates to:
+  /// **'Unsupported country.'**
+  String get unsupportedCountryLabel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

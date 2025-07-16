@@ -4,7 +4,8 @@ import '../../l10n/app_localizations.dart';
 import 'sign_up_form_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+  final Map<String, dynamic> selectedCountry;
+  const SignUpScreen({super.key, required this.selectedCountry});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class SignUpScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (_) => const SignUpFormScreen(),
+                    builder: (_) => SignUpFormScreen(selectedCountry: selectedCountry),
                   ),
                 );
               },

@@ -14,5 +14,19 @@
   "isForeignerLabel": "Tôi là người nước ngoài",
   "visaExpirationDateLabel": "Ngày hết hạn visa",
   "selectDateLabel": "Chọn ngày",
-  "nextButton": "Tiếp theo"
+  "nextButton": "Tiếp theo",
+  "rrnLabel": "Số đăng ký người nước ngoài",
+  "phoneLabel": "Số điện thoại",
+  "emailLabel": "Email",
+  "visaTypeLabel": "Loại thị thực",
+  "attachmentTitle": "Tài liệu đính kèm",
+  "uploadLabel": "Tải lên",
+  "uploadedLabel": "Đã tải lên",
+  "idCardLabel": "Thẻ căn cước",
+  "constructionCertLabel": "Chứng chỉ đào tạo xây dựng",
+  "qualificationCertLabel": "Chứng chỉ liên quan",
+  "prePlacementTestLabel": "Đã kiểm tra trước khi bố trí",
+  "alienCardFrontLabel": "Thẻ đăng ký người nước ngoài (Mặt trước)",
+  "alienCardBackLabel": "Thẻ đăng ký người nước ngoài (Mặt sau)",
+  "unsupportedCountryLabel": "Quốc gia không được hỗ trợ."
 }

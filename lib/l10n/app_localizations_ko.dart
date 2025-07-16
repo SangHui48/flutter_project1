@@ -50,4 +50,32 @@ class AppLocalizationsKo extends AppLocalizations {
   String get selectDateLabel => '날짜 선택';
   @override
   String get nextButton => '다음';
+  @override
+  String get rrnLabel => '외국인 등록번호';
+  @override
+  String get phoneLabel => '휴대폰 번호';
+  @override
+  String get emailLabel => '이메일';
+  @override
+  String get visaTypeLabel => '비자 종류';
+  @override
+  String get attachmentTitle => '첨부 서류';
+  @override
+  String get uploadLabel => '업로드';
+  @override
+  String get uploadedLabel => '업로드 완료';
+  @override
+  String get idCardLabel => '신분증';
+  @override
+  String get constructionCertLabel => '건설이수증';
+  @override
+  String get qualificationCertLabel => '관련 자격증';
+  @override
+  String get prePlacementTestLabel => '배치전검사 결과 있음';
+  @override
+  String get alienCardFrontLabel => '외국인 등록증 앞면';
+  @override
+  String get alienCardBackLabel => '외국인 등록증 뒷면';
+  @override
+  String get unsupportedCountryLabel => '지원하지 않는 국가입니다.';
 }

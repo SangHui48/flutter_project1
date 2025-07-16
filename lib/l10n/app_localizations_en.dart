@@ -50,4 +50,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selectDateLabel => 'Select date';
   @override
   String get nextButton => 'Next';
+  @override
+  String get rrnLabel => 'Alien Registration Number';
+  @override
+  String get phoneLabel => 'Phone Number';
+  @override
+  String get emailLabel => 'Email';
+  @override
+  String get visaTypeLabel => 'Visa Type';
+  @override
+  String get attachmentTitle => 'Attachment Documents';
+  @override
+  String get uploadLabel => 'Upload';
+  @override
+  String get uploadedLabel => 'Uploaded';
+  @override
+  String get idCardLabel => 'ID Card';
+  @override
+  String get constructionCertLabel => 'Construction Training Certificate';
+  @override
+  String get qualificationCertLabel => 'Related Qualification Certificate';
+  @override
+  String get prePlacementTestLabel => 'Pre-placement test completed';
+  @override
+  String get alienCardFrontLabel => 'Alien Registration Card (Front)';
+  @override
+  String get alienCardBackLabel => 'Alien Registration Card (Back)';
+  @override
+  String get unsupportedCountryLabel => 'Unsupported country.';
 }

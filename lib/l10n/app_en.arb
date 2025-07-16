@@ -14,5 +14,19 @@
   "isForeignerLabel": "I am a foreigner",
   "visaExpirationDateLabel": "Visa Expiration Date",
   "selectDateLabel": "Select date",
-  "nextButton": "Next"
+  "nextButton": "Next",
+  "rrnLabel": "Alien Registration Number",
+  "phoneLabel": "Phone Number",
+  "emailLabel": "Email",
+  "visaTypeLabel": "Visa Type",
+  "attachmentTitle": "Attachment Documents",
+  "uploadLabel": "Upload",
+  "uploadedLabel": "Uploaded",
+  "idCardLabel": "ID Card",
+  "constructionCertLabel": "Construction Training Certificate",
+  "qualificationCertLabel": "Related Qualification Certificate",
+  "prePlacementTestLabel": "Pre-placement test completed",
+  "alienCardFrontLabel": "Alien Registration Card (Front)",
+  "alienCardBackLabel": "Alien Registration Card (Back)",
+  "unsupportedCountryLabel": "Unsupported country."
 }

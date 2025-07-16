@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
+import 'sign_up_attachment_screen.dart'; // Added import for SignUpAttachmentScreen
 
 class SignUpFormScreen extends StatefulWidget {
-  const SignUpFormScreen({super.key});
+  final Map<String, dynamic> selectedCountry;
+  const SignUpFormScreen({super.key, required this.selectedCountry});
 
   @override
   State<SignUpFormScreen> createState() => _SignUpFormScreenState();
@@ -13,14 +15,26 @@ class _SignUpFormScreenState extends State<SignUpFormScreen> {
 
   // 회원가입 필드 변수
   String? id;
+  String? password;
   String? name;
+  String? rrn;
+  String? phone;
+  String? email;
   String? phoneOrEmail;
   bool isForeigner = false;
   DateTime? visaExpirationDate;
+  String? idImagePath;
 
   @override
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context);
+    final isKorea = widget.selectedCountry['locale']?.languageCode == 'ko';
+    // Localization helpers for new fields
+    final rrnLabel = AppLocalizations.of(context)?.rrnLabel ?? '주민등록번호';
+    final phoneLabel = AppLocalizations.of(context)?.phoneLabel ?? '휴대폰 번호';
+    final emailLabel = AppLocalizations.of(context)?.emailLabel ?? '이메일';
+    final visaTypeLabel = AppLocalizations.of(context)?.visaTypeLabel ?? '비자 종류';
+    final visaExpiryLabel = AppLocalizations.of(context)?.visaExpirationDateLabel ?? '비자 만료일';
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.signUpButton),
@@ -35,13 +49,22 @@ class _SignUpFormScreenState extends State<SignUpFormScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 16),
+              // 한국, 중국, 영어권 모두 동일한 기본 항목
               TextFormField(
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.idLabel,
                   border: const OutlineInputBorder(),
                 ),
                 onChanged: (val) => id = val,
-                validator: (val) => val == null || val.isEmpty ? "${AppLocalizations.of(context)!.idLabel}를 입력하세요" : null,
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.passwordLabel,
+                  border: const OutlineInputBorder(),
+                ),
+                onChanged: (val) => password = val,
               ),
               const SizedBox(height: 16),
               TextFormField(
@@ -50,65 +73,80 @@ class _SignUpFormScreenState extends State<SignUpFormScreen> {
                   border: const OutlineInputBorder(),
                 ),
                 onChanged: (val) => name = val,
-                validator: (val) => val == null || val.isEmpty ? "${AppLocalizations.of(context)!.nameLabel}을 입력하세요" : null,
               ),
               const SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.phoneOrEmailLabel,
+                  labelText: rrnLabel,
+                  hintText: rrnLabel,
                   border: const OutlineInputBorder(),
                 ),
-                onChanged: (val) => phoneOrEmail = val,
-                validator: (val) => val == null || val.isEmpty ? "${AppLocalizations.of(context)!.phoneOrEmailLabel}을 입력하세요" : null,
+                onChanged: (val) => rrn = val,
               ),
               const SizedBox(height: 16),
-              // 한국어가 아닐 때만 외국인 토글 및 비자 만료일 노출
-              if (locale.languageCode != 'ko') ...[
-                Row(
-                  children: [
-                    Switch(
-                      value: isForeigner,
-                      onChanged: (val) {
-                        setState(() {
-                          isForeigner = val;
-                          if (!val) visaExpirationDate = null;
-                        });
-                      },
-                    ),
-                    Text(AppLocalizations.of(context)!.isForeignerLabel),
-                  ],
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: phoneLabel,
+                  hintText: phoneLabel,
+                  border: const OutlineInputBorder(),
                 ),
-                if (isForeigner) ...[
-                  const SizedBox(height: 8),
-                  GestureDetector(
-                    onTap: () async {
-                      final picked = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2100),
-                      );
-                      if (picked != null) {
-                        setState(() => visaExpirationDate = picked);
-                      }
-                    },
-                    child: InputDecorator(
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.visaExpirationDateLabel,
-                        border: const OutlineInputBorder(),
-                      ),
-                      child: Text(
-                        visaExpirationDate == null
-                            ? AppLocalizations.of(context)!.selectDateLabel
-                            : visaExpirationDate!.toIso8601String().split('T').first,
-                        style: TextStyle(
-                          color: visaExpirationDate == null ? Colors.grey : Colors.black,
-                          fontSize: 16,
-                        ),
+                onChanged: (val) => phone = val,
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: emailLabel,
+                  hintText: emailLabel,
+                  border: const OutlineInputBorder(),
+                ),
+                onChanged: (val) => email = val,
+              ),
+              const SizedBox(height: 16),
+              // 중국/영어권만 비자, 비자만료일 추가
+              if (!isKorea) ...[
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: visaTypeLabel,
+                    hintText: visaTypeLabel,
+                    border: const OutlineInputBorder(),
+                  ),
+                  onChanged: (val) {
+                    // TODO: 비자 종류 저장
+                  },
+                ),
+                const SizedBox(height: 16),
+                GestureDetector(
+                  onTap: () async {
+                    final picked = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                    );
+                    if (picked != null) {
+                      setState(() {
+                        visaExpirationDate = picked;
+                      });
+                    }
+                  },
+                  child: InputDecorator(
+                    decoration: InputDecoration(
+                      labelText: visaExpiryLabel,
+                      hintText: visaExpiryLabel,
+                      border: const OutlineInputBorder(),
+                    ),
+                    child: Text(
+                      visaExpirationDate == null
+                          ? (AppLocalizations.of(context)?.selectDateLabel ?? '날짜 선택')
+                          : visaExpirationDate!.toIso8601String().split('T').first,
+                      style: TextStyle(
+                        color: visaExpirationDate == null ? Colors.grey : Colors.black,
+                        fontSize: 16,
                       ),
                     ),
                   ),
-                ],
+                ),
+                const SizedBox(height: 16),
               ],
               const SizedBox(height: 32),
               ElevatedButton(
@@ -120,8 +158,15 @@ class _SignUpFormScreenState extends State<SignUpFormScreen> {
                   ),
                 ),
                 onPressed: () {
-                  if (_formKey.currentState?.validate() ?? false) {
-                    // TODO: 다음 회원가입 페이지로 이동 (입력값 전달)
+                  final lang = widget.selectedCountry['locale']?.languageCode;
+                  if (lang == 'ko' || lang == 'zh' || lang == 'en') {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => SignUpAttachmentScreen(selectedCountry: widget.selectedCountry),
+                      ),
+                    );
+                  } else {
+                    // TODO: 기타 국가 처리
                   }
                 },
                 child: Text(

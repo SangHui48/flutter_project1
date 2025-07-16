@@ -1,20 +1,32 @@
 import 'package:flutter/material.dart';
 import 'sign_up_screen.dart';
 
-class CountrySelectionScreen extends StatelessWidget {
+class CountrySelectionScreen extends StatefulWidget {
   final void Function(Locale) onLocaleSelected;
   
   const CountrySelectionScreen({super.key, required this.onLocaleSelected});
 
   @override
+  State<CountrySelectionScreen> createState() => _CountrySelectionScreenState();
+}
+
+class _CountrySelectionScreenState extends State<CountrySelectionScreen> {
+  final List<Map<String, dynamic>> countries = [
+    {'label': '한국', 'locale': const Locale('ko'), 'flag': '🇰🇷'},
+    {'label': '中国', 'locale': const Locale('zh'), 'flag': '🇨🇳'},
+    {'label': 'English', 'locale': const Locale('en'), 'flag': null},
+  ];
+
+  Map<String, dynamic>? selectedCountry;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedCountry = countries[0];
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final countries = [
-      {'label': '한국', 'locale': const Locale('ko'), 'flag': '🇰🇷'},
-      {'label': '中国', 'locale': const Locale('zh'), 'flag': '🇨🇳'},
-      {'label': 'English', 'locale': const Locale('en'), 'flag': '🇺🇸'},
-      {'label': 'Việt Nam', 'locale': const Locale('vi'), 'flag': '🇻🇳'},
-    ];
-    
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -34,47 +46,69 @@ class CountrySelectionScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 32),
-            ...countries.map((country) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF002B5B),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 18),
-                  elevation: 0,
-                ),
-                onPressed: () {
-                  final locale = country['locale'] as Locale;
-                  onLocaleSelected(locale);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const SignUpScreen(),
-                    ),
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      country['flag'] as String,
-                      style: const TextStyle(fontSize: 22),
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      country['label'] as String,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Roboto',
+            DropdownButton<Map<String, dynamic>>(
+              value: selectedCountry,
+              isExpanded: true,
+              icon: const Icon(Icons.arrow_drop_down, color: Color(0xFF002B5B)),
+              items: countries.map((country) {
+                return DropdownMenuItem<Map<String, dynamic>>(
+                  value: country,
+                  child: Row(
+                    children: [
+                      if (country['flag'] != null)
+                        Text(country['flag'] as String, style: const TextStyle(fontSize: 22))
+                      else
+                        const Icon(Icons.public, size: 22, color: Color(0xFF002B5B)),
+                      const SizedBox(width: 12),
+                      Text(
+                        country['label'] as String,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Roboto',
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                );
+              }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  selectedCountry = value;
+                });
+              },
+            ),
+            const SizedBox(height: 32),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF002B5B),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 18),
+                elevation: 0,
+              ),
+              onPressed: selectedCountry == null
+                  ? null
+                  : () {
+                      final locale = selectedCountry!['locale'] as Locale;
+                      widget.onLocaleSelected(locale);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => SignUpScreen(selectedCountry: selectedCountry!),
+                        ),
+                      );
+                    },
+              child: const Text(
+                '확인',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Roboto',
                 ),
               ),
-            )),
+            ),
           ],
         ),
       ),

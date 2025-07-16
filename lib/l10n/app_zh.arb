@@ -14,5 +14,19 @@
   "isForeignerLabel": "我是外国人",
   "visaExpirationDateLabel": "签证到期日",
   "selectDateLabel": "选择日期",
-  "nextButton": "下一步"
+  "nextButton": "下一步",
+  "rrnLabel": "外国人登录证号码",
+  "phoneLabel": "手机号",
+  "emailLabel": "邮箱",
+  "visaTypeLabel": "签证类型",
+  "attachmentTitle": "附件材料",
+  "uploadLabel": "上传",
+  "uploadedLabel": "已上传",
+  "idCardLabel": "身份证",
+  "constructionCertLabel": "建筑培训证书",
+  "qualificationCertLabel": "相关资格证书",
+  "prePlacementTestLabel": "已完成上岗前体检",
+  "alienCardFrontLabel": "外国人登录证（正面）",
+  "alienCardBackLabel": "外国人登录证（背面）",
+  "unsupportedCountryLabel": "不支持的国家。"
 }
