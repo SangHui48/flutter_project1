@@ -1,37 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/rendering.dart';
 import '../constants/app_constants.dart';
 import '../controllers/job_controller.dart';
 import '../widgets/job_card.dart';
 import '../widgets/job_map_view.dart';
 
 // 일자리 신청 화면
-class JobScreen extends StatelessWidget {
+class JobScreen extends StatefulWidget {
   const JobScreen({super.key});
+
+  @override
+  State<JobScreen> createState() => _JobScreenState();
+}
+
+class _JobScreenState extends State<JobScreen> with TickerProviderStateMixin {
+  bool _showHeader = true;
+  final ScrollController _listController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     final JobController jobController = Get.find<JobController>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('일자리 신청'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: () => jobController.refreshJobs(),
-          ),
-        ],
-      ),
       body: Column(
         children: [
-          // 필터 및 정렬 영역
-          _buildFilterSection(jobController),
-          
-          // 뷰 모드 토글
-          _buildViewModeToggle(jobController),
-          
-          // 일자리 목록 또는 지도
+          AnimatedSize(
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+            child: Visibility(
+              visible: _showHeader,
+              maintainState: true,
+              child: Column(
+                children: [
+                  _buildFilterSection(jobController),
+                  _buildViewModeToggle(jobController),
+                ],
+              ),
+            ),
+          ),
           Expanded(
             child: Obx(() {
               if (jobController.isLoading.value) {
@@ -54,11 +61,27 @@ class JobScreen extends StatelessWidget {
                   ),
                 );
               }
-              
+
               if (jobController.isMapView.value) {
+                // 지도 보는 중에는 헤더 고정 노출
+                if (!_showHeader) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    if (mounted) setState(() => _showHeader = true);
+                  });
+                }
                 return JobMapView();
               } else {
-                return _buildJobList(jobController);
+                return NotificationListener<UserScrollNotification>(
+                  onNotification: (notification) {
+                    if (notification.direction == ScrollDirection.reverse && _showHeader) {
+                      setState(() => _showHeader = false);
+                    } else if (notification.direction == ScrollDirection.forward && !_showHeader) {
+                      setState(() => _showHeader = true);
+                    }
+                    return false;
+                  },
+                  child: _buildJobList(jobController, controller: _listController),
+                );
               }
             }),
           ),
@@ -75,7 +98,7 @@ class JobScreen extends StatelessWidget {
         color: Colors.white,
         border: Border(
           bottom: BorderSide(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: 0.2),
             width: 1,
           ),
         ),
@@ -172,7 +195,7 @@ class JobScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: !jobController.isMapView.value
                       ? Color(AppConstants.primaryColorHex)
-                      : Colors.grey.withOpacity(0.1),
+                      : Colors.grey.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Center(
@@ -212,7 +235,7 @@ class JobScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: jobController.isMapView.value
                       ? Color(AppConstants.primaryColorHex)
-                      : Colors.grey.withOpacity(0.1),
+                      : Colors.grey.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Center(
@@ -249,7 +272,7 @@ class JobScreen extends StatelessWidget {
   }
 
   // 일자리 목록
-  Widget _buildJobList(JobController jobController) {
+  Widget _buildJobList(JobController jobController, {ScrollController? controller}) {
     return Obx(() {
       if (jobController.filteredJobList.isEmpty) {
         return Center(
@@ -287,6 +310,7 @@ class JobScreen extends StatelessWidget {
         onRefresh: () => jobController.refreshJobs(),
         color: Color(AppConstants.primaryColorHex),
         child: ListView.builder(
+          controller: controller,
           padding: EdgeInsets.all(AppConstants.mediumPadding),
           itemCount: jobController.filteredJobList.length,
           itemBuilder: (context, index) {

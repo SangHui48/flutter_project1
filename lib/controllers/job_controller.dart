@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import '../models/job_model.dart';
-import '../constants/app_constants.dart';
 
 // 일자리 관련 상태를 관리하는 컨트롤러
 class JobController extends GetxController {

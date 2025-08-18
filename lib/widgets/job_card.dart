@@ -101,7 +101,7 @@ class JobCard extends StatelessWidget {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: Color(AppConstants.primaryColorHex).withOpacity(0.1),
+                      color: Color(AppConstants.primaryColorHex).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -253,7 +253,7 @@ class JobCard extends StatelessWidget {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.3),
+                color: Colors.grey.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -322,7 +322,7 @@ class JobCard extends StatelessWidget {
                             vertical: AppConstants.smallPadding,
                           ),
                           decoration: BoxDecoration(
-                            color: Color(AppConstants.primaryColorHex).withOpacity(0.1),
+                            color: Color(AppConstants.primaryColorHex).withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Row(

@@ -1,36 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import '../constants/app_constants.dart';
 import '../controllers/work_log_controller.dart';
 import '../widgets/work_log_card.dart';
 
 // 공수 관리 화면
-class WorkLogScreen extends StatelessWidget {
+class WorkLogScreen extends StatefulWidget {
   const WorkLogScreen({super.key});
+
+  @override
+  State<WorkLogScreen> createState() => _WorkLogScreenState();
+}
+
+class _WorkLogScreenState extends State<WorkLogScreen> {
+  bool _showHeader = true;
+  final ScrollController _listController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     final WorkLogController workLogController = Get.find<WorkLogController>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('공수 관리'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: () => workLogController.refreshWorkLogs(),
-          ),
-        ],
-      ),
       body: Column(
         children: [
-          // 통계 정보
-          _buildStatisticsSection(workLogController),
-          
-          // 탭 바
-          _buildTabBar(workLogController),
-          
-          // 작업 내역 목록
+          AnimatedSize(
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+            child: Visibility(
+              visible: _showHeader,
+              maintainState: true,
+              child: Column(
+                children: [
+                  _buildStatisticsSection(workLogController),
+                  _buildTabBar(workLogController),
+                ],
+              ),
+            ),
+          ),
           Expanded(
             child: Obx(() {
               if (workLogController.isLoading.value) {
@@ -53,8 +60,18 @@ class WorkLogScreen extends StatelessWidget {
                   ),
                 );
               }
-              
-              return _buildWorkLogList(workLogController);
+
+              return NotificationListener<UserScrollNotification>(
+                onNotification: (notification) {
+                  if (notification.direction == ScrollDirection.reverse && _showHeader) {
+                    setState(() => _showHeader = false);
+                  } else if (notification.direction == ScrollDirection.forward && !_showHeader) {
+                    setState(() => _showHeader = true);
+                  }
+                  return false;
+                },
+                child: _buildWorkLogList(workLogController, scrollController: _listController),
+              );
             }),
           ),
         ],
@@ -137,7 +154,7 @@ class WorkLogScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(AppConstants.mediumPadding),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
+        color: Colors.white.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -161,7 +178,7 @@ class WorkLogScreen extends StatelessWidget {
             title,
             style: TextStyle(
               fontSize: AppConstants.smallFontSize,
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.withValues(alpha: 0.8),
             ),
           ),
         ],
@@ -240,9 +257,9 @@ class WorkLogScreen extends StatelessWidget {
   }
 
   // 작업 내역 목록
-  Widget _buildWorkLogList(WorkLogController controller) {
+  Widget _buildWorkLogList(WorkLogController workLogController, {ScrollController? scrollController}) {
     return Obx(() {
-      if (controller.filteredWorkLogList.isEmpty) {
+      if (workLogController.filteredWorkLogList.isEmpty) {
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -276,13 +293,14 @@ class WorkLogScreen extends StatelessWidget {
       }
 
       return RefreshIndicator(
-        onRefresh: () => controller.refreshWorkLogs(),
+        onRefresh: () => workLogController.refreshWorkLogs(),
         color: Color(AppConstants.primaryColorHex),
         child: ListView.builder(
+          controller: scrollController,
           padding: EdgeInsets.all(AppConstants.mediumPadding),
-          itemCount: controller.filteredWorkLogList.length,
+          itemCount: workLogController.filteredWorkLogList.length,
           itemBuilder: (context, index) {
-            final workLog = controller.filteredWorkLogList[index];
+            final workLog = workLogController.filteredWorkLogList[index];
             return Padding(
               padding: EdgeInsets.only(bottom: AppConstants.mediumPadding),
               child: WorkLogCard(workLog: workLog),

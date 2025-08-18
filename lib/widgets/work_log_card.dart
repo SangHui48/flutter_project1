@@ -49,7 +49,7 @@ class WorkLogCard extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: Color(workLog.statusColor).withOpacity(0.1),
+                    color: Color(workLog.statusColor).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: Color(workLog.statusColor),

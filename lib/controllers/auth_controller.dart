@@ -27,6 +27,8 @@ class AuthController extends GetxController {
   
   // SMS 인증 완료 여부
   final RxBool isSmsVerified = false.obs;
+  // 비밀번호가 설정되었는지 여부
+  final RxBool hasPassword = false.obs;
   
   // 외국인 여부
   final RxBool isForeigner = false.obs;
@@ -47,6 +49,7 @@ class AuthController extends GetxController {
       final prefs = await SharedPreferences.getInstance();
       final userJson = prefs.getString('user');
       final isLoggedInValue = prefs.getBool('isLoggedIn') ?? false;
+      hasPassword.value = prefs.getBool('hasPassword') ?? false;
       
       if (isLoggedInValue && userJson != null) {
         // TODO: 실제로는 서버에서 사용자 정보를 다시 확인해야 함
@@ -115,6 +118,24 @@ class AuthController extends GetxController {
     }
   }
 
+  // 비밀번호 설정 완료 처리 (회원가입 마무리)
+  Future<bool> completeRegistrationWithPassword(String password) async {
+    try {
+      isLoading.value = true;
+      await Future.delayed(Duration(milliseconds: 500));
+      // TODO: 서버에 비밀번호 설정 저장
+      hasPassword.value = true;
+      // 이미 생성한 tempUser가 있을 수 있으므로 그대로 둠
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('hasPassword', true);
+      return true;
+    } catch (e) {
+      return false;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   // 로그인 처리
   Future<bool> login() async {
     try {
@@ -140,11 +161,13 @@ class AuthController extends GetxController {
       
       user.value = tempUser;
       isLoggedIn.value = true;
+      // 로그인 시점에서는 hasPassword가 true여야 완전 로그인으로 본다고 가정
       
       // 로그인 상태 저장
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool('isLoggedIn', true);
       await prefs.setString('user', tempUser.toJson().toString());
+      await prefs.setBool('hasPassword', hasPassword.value);
       
       return true;
     } catch (e) {
@@ -169,6 +192,7 @@ class AuthController extends GetxController {
       isSmsVerified.value = false;
       smsCode.value = '';
       phoneNumber.value = '';
+      // 로그아웃 후 비밀번호 로그인 화면을 사용하기 위해 hasPassword 유지
       
       // 저장된 로그인 정보 삭제
       final prefs = await SharedPreferences.getInstance();

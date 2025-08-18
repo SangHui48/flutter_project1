@@ -6,8 +6,8 @@ import 'controllers/auth_controller.dart';
 import 'controllers/job_controller.dart';
 import 'controllers/profile_controller.dart';
 import 'controllers/work_log_controller.dart';
+import 'controllers/team_post_controller.dart';
 import 'screens/intro_screen.dart';
-import 'screens/onboarding_screen.dart';
 import 'screens/main_screen.dart';
 
 void main() {
@@ -24,6 +24,7 @@ class ODDOApp extends StatelessWidget {
     Get.put(JobController());
     Get.put(ProfileController());
     Get.put(WorkLogController());
+    Get.put(TeamPostController());
 
     return GetMaterialApp(
       title: AppConstants.appName,

@@ -4,7 +4,8 @@ import '../constants/app_constants.dart';
 import '../controllers/auth_controller.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
-import 'main_screen.dart';
+// import 'main_screen.dart';
+import 'password_setup_screen.dart';
 
 // 로그인 화면
 class LoginScreen extends StatefulWidget {
@@ -51,57 +52,79 @@ class _LoginScreenState extends State<LoginScreen> {
         elevation: 0,
         foregroundColor: Color(AppConstants.textColorHex),
       ),
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(AppConstants.largePadding),
-          child: Column(
-            children: [
-              // 로고 영역
-              Expanded(
-                flex: 1,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Color(AppConstants.primaryColorHex),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Center(
-                          child: Text(
-                            AppConstants.appName,
-                            style: TextStyle(
-                              fontSize: AppConstants.titleFontSize,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+            return AnimatedContainer(
+              duration: Duration(milliseconds: 200),
+              curve: Curves.easeOut,
+              padding: EdgeInsets.only(bottom: bottomInset),
+              child: SingleChildScrollView(
+                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                child: Padding(
+                  padding: EdgeInsets.all(AppConstants.largePadding),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                    child: IntrinsicHeight(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // 로고 영역
+                          Flexible(
+                            fit: FlexFit.loose,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 100,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      color: Color(AppConstants.primaryColorHex),
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        AppConstants.appName,
+                                        style: TextStyle(
+                                          fontSize: AppConstants.titleFontSize,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: AppConstants.largePadding),
+                                  Text(
+                                    '휴대폰 번호로 로그인',
+                                    style: TextStyle(
+                                      fontSize: AppConstants.titleFontSize,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(AppConstants.textColorHex),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
+
+                          SizedBox(height: AppConstants.mediumPadding),
+
+                          // 로그인/인증 폼
+                          Flexible(
+                            fit: FlexFit.loose,
+                            child: _buildCurrentForm(),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: AppConstants.largePadding),
-                      Text(
-                        '휴대폰 번호로 로그인',
-                        style: TextStyle(
-                          fontSize: AppConstants.titleFontSize,
-                          fontWeight: FontWeight.w600,
-                          color: Color(AppConstants.textColorHex),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-
-              // 로그인 폼
-              Expanded(
-                flex: 2,
-                child: _buildCurrentForm(),
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
@@ -237,23 +260,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ? () async {
                   final success = await authController.verifySmsCode();
                   if (success) {
-                    final loginSuccess = await authController.login();
-                    if (loginSuccess) {
-                      Get.off(() => const MainScreen());
-                      Get.snackbar(
-                        '로그인 성공',
-                        'ODDO에 오신 것을 환영합니다!',
-                        backgroundColor: Color(AppConstants.accentColorHex),
-                        colorText: Color(AppConstants.textColorHex),
-                      );
-                    } else {
-                      Get.snackbar(
-                        '로그인 실패',
-                        '로그인에 실패했습니다.',
-                        backgroundColor: Colors.red,
-                        colorText: Colors.white,
-                      );
-                    }
+                    // SMS 인증 성공 후: 비밀번호 설정 화면으로 이동
+                    Get.to(() => const PasswordSetupScreen());
                   } else {
                     Get.snackbar(
                       '인증 실패',

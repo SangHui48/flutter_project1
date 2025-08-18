@@ -6,6 +6,7 @@ class UserModel {
   final String? profileImageUrl;
   final List<String> skills;
   final bool isAvailableToday;
+  final bool isTeamLeader; // 팀장 권한 여부
   final String? visaType;
   final String? countryCode;
   final DateTime createdAt;
@@ -18,6 +19,7 @@ class UserModel {
     this.profileImageUrl,
     required this.skills,
     required this.isAvailableToday,
+    this.isTeamLeader = false,
     this.visaType,
     this.countryCode,
     required this.createdAt,
@@ -33,6 +35,7 @@ class UserModel {
       profileImageUrl: json['profileImageUrl'],
       skills: List<String>.from(json['skills'] ?? []),
       isAvailableToday: json['isAvailableToday'] ?? false,
+      isTeamLeader: json['isTeamLeader'] ?? false,
       visaType: json['visaType'],
       countryCode: json['countryCode'],
       createdAt: DateTime.parse(json['createdAt'] ?? DateTime.now().toIso8601String()),
@@ -49,6 +52,7 @@ class UserModel {
       'profileImageUrl': profileImageUrl,
       'skills': skills,
       'isAvailableToday': isAvailableToday,
+      'isTeamLeader': isTeamLeader,
       'visaType': visaType,
       'countryCode': countryCode,
       'createdAt': createdAt.toIso8601String(),
@@ -64,6 +68,7 @@ class UserModel {
     String? profileImageUrl,
     List<String>? skills,
     bool? isAvailableToday,
+    bool? isTeamLeader,
     String? visaType,
     String? countryCode,
     DateTime? createdAt,
@@ -76,6 +81,7 @@ class UserModel {
       profileImageUrl: profileImageUrl ?? this.profileImageUrl,
       skills: skills ?? this.skills,
       isAvailableToday: isAvailableToday ?? this.isAvailableToday,
+      isTeamLeader: isTeamLeader ?? this.isTeamLeader,
       visaType: visaType ?? this.visaType,
       countryCode: countryCode ?? this.countryCode,
       createdAt: createdAt ?? this.createdAt,

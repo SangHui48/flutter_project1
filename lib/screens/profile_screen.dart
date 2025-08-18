@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../constants/app_constants.dart';
 import '../controllers/profile_controller.dart';
-import '../controllers/auth_controller.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
 
@@ -13,18 +12,8 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ProfileController profileController = Get.find<ProfileController>();
-    final AuthController authController = Get.find<AuthController>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('내 정보 관리'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: () => _showLogoutDialog(context, authController),
-          ),
-        ],
-      ),
       body: Obx(() {
         if (profileController.isLoading.value) {
           return Center(
@@ -96,7 +85,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundColor: Color(AppConstants.grayColorHex).withOpacity(0.1),
+                    backgroundColor: Color(AppConstants.grayColorHex).withValues(alpha: 0.1),
                     backgroundImage: controller.profileImageFile.value != null
                         ? null // TODO: 이미지 표시
                         : null,
@@ -220,12 +209,12 @@ class ProfileScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: isSelected
                             ? Color(AppConstants.primaryColorHex)
-                            : Color(AppConstants.primaryColorHex).withOpacity(0.1),
+                            : Color(AppConstants.primaryColorHex).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: isSelected
                               ? Color(AppConstants.primaryColorHex)
-                              : Color(AppConstants.grayColorHex).withOpacity(0.3),
+                              : Color(AppConstants.grayColorHex).withValues(alpha: 0.3),
                         ),
                       ),
                       child: Row(
@@ -376,31 +365,5 @@ class ProfileScreen extends StatelessWidget {
     }
   }
 
-  // 로그아웃 다이얼로그
-  void _showLogoutDialog(BuildContext context, AuthController authController) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('로그아웃'),
-        content: Text('정말 로그아웃하시겠습니까?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('취소'),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              Navigator.pop(context);
-              await authController.logout();
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
-              foregroundColor: Colors.white,
-            ),
-            child: Text('로그아웃'),
-          ),
-        ],
-      ),
-    );
-  }
+  // (unused) 로그아웃 다이얼로그 제거됨: 메인 공통 앱바에서 처리
 }

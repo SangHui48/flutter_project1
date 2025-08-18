@@ -37,7 +37,7 @@ class JobMapView extends StatelessWidget {
       }
 
       return Container(
-        color: Colors.grey.withOpacity(0.1),
+        color: Colors.grey.withValues(alpha: 0.1),
         child: Stack(
           children: [
             // 지도 배경 (임시)
@@ -45,7 +45,7 @@ class JobMapView extends StatelessWidget {
               width: double.infinity,
               height: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.blue.withOpacity(0.1),
+                color: Colors.blue.withValues(alpha: 0.1),
                 image: DecorationImage(
                   image: NetworkImage(
                     'https://maps.googleapis.com/maps/api/staticmap?center=37.5665,126.9780&zoom=12&size=600x400&maptype=roadmap&markers=color:red%7C37.5665,126.9780&key=YOUR_API_KEY',
@@ -57,7 +57,7 @@ class JobMapView extends StatelessWidget {
                 ),
               ),
               child: Container(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withValues(alpha: 0.3),
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +81,7 @@ class JobMapView extends StatelessWidget {
                         'Google Maps API 연동 필요',
                         style: TextStyle(
                           fontSize: AppConstants.mediumFontSize,
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.white.withValues(alpha: 0.8),
                         ),
                       ),
                     ],
@@ -111,7 +111,7 @@ class JobMapView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.black.withValues(alpha: 0.2),
                           blurRadius: 4,
                           offset: Offset(0, 2),
                         ),
@@ -189,7 +189,7 @@ class JobMapView extends StatelessWidget {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.3),
+                  color: Colors.grey.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
